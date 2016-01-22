@@ -133,14 +133,14 @@ RUN set -x \
 	&& rm -rf "$GOPATH"
 
 # Install notary server
-ENV NOTARY_COMMIT 8e8122eb5528f621afcd4e2854c47302f17392f7
-RUN set -x \
-	&& export GOPATH="$(mktemp -d)" \
-	&& git clone https://github.com/docker/notary.git "$GOPATH/src/github.com/docker/notary" \
-	&& (cd "$GOPATH/src/github.com/docker/notary" && git checkout -q "$NOTARY_COMMIT") \
-	&& GOPATH="$GOPATH/src/github.com/docker/notary/Godeps/_workspace:$GOPATH" \
-		go build -o /usr/local/bin/notary-server github.com/docker/notary/cmd/notary-server \
-	&& rm -rf "$GOPATH"
+#ENV NOTARY_COMMIT 8e8122eb5528f621afcd4e2854c47302f17392f7
+#RUN set -x \
+#	&& export GOPATH="$(mktemp -d)" \
+#	&& git clone https://github.com/docker/notary.git "$GOPATH/src/github.com/docker/notary" \
+#	&& (cd "$GOPATH/src/github.com/docker/notary" && git checkout -q "$NOTARY_COMMIT") \
+#	&& GOPATH="$GOPATH/src/github.com/docker/notary/Godeps/_workspace:$GOPATH" \
+#		go build -o /usr/local/bin/notary-server github.com/docker/notary/cmd/notary-server \
+#	&& rm -rf "$GOPATH"
 
 # Get the "docker-py" source so we can run their integration tests
 ENV DOCKER_PY_COMMIT 47ab89ec2bd3bddf1221b856ffbaff333edeabb4
