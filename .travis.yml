@@ -6,6 +6,9 @@ script:
   - make binary
   - ls -lR .git/logs
   - ls -l bundles/1.9.1/binary
+  - sudo chown -R travis:travis bundles
+  - ls -l bundles/1.9.1/binary
+  - mkdir -p .git/logs/refs
 
 deploy:
   provider: releases
