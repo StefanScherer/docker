@@ -85,11 +85,10 @@ RUN cd /usr/src/lxc \
 
 # Install Go
 ENV GO_VERSION 1.4.3
-RUN curl -sSL https://golang.org/dl/go${GO_VERSION}.src.tar.gz | tar -v -C /usr/local -xz \
-	&& mkdir -p /go/bin
+RUN curl -fsSL "https://storage.googleapis.com/golang/go${GO_VERSION}.linux-386.tar.gz" \
+	| tar -xzC /usr/local
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 ENV GOPATH /go:/go/src/github.com/docker/docker/vendor
-RUN cd /usr/local/go/src && ./make.bash --no-clean 2>&1
 
 # Compile Go for cross compilation
 ENV DOCKER_CROSSPLATFORMS \
