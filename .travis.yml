@@ -4,7 +4,7 @@ services:
 language: bash
 script:
   - make binary
-  - ls -lR.git/logs
+  - ls -lR .git/logs
   - ls -l bundles/1.9.1/binary
 
 deploy:
