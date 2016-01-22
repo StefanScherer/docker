@@ -23,7 +23,7 @@
 # the case. Therefore, you don't have to disable it anymore.
 #
 
-FROM ubuntu:14.04
+FROM 32bit/ubuntu:14.04
 MAINTAINER Tianon Gravi <admwiggin@gmail.com> (@tianon)
 
 RUN	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys E871F18B51E0147C77796AC81196BA81F6B0FC61
