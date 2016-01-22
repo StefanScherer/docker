@@ -99,13 +99,6 @@ ENV DOCKER_CROSSPLATFORMS \
 
 # (set an explicit GOARM of 5 for maximum compatibility)
 ENV GOARM 5
-RUN cd /usr/local/go/src \
-	&& set -x \
-	&& for platform in $DOCKER_CROSSPLATFORMS; do \
-		GOOS=${platform%/*} \
-		GOARCH=${platform##*/} \
-			./make.bash --no-clean 2>&1; \
-	done
 
 # This has been commented out and kept as reference because we don't support compiling with older Go anymore.
 # ENV GOFMT_VERSION 1.3.3
