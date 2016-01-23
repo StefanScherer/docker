@@ -4,8 +4,7 @@ services:
 language: bash
 script:
   - make binary
-  # - sudo chown -R travis:travis bundles
-  # - mkdir -p .git/logs/refs
+  - sudo chown -R travis:travis bundles
 
 deploy:
   provider: releases
