@@ -23,7 +23,7 @@
 # the case. Therefore, you don't have to disable it anymore.
 #
 
-FROM ubuntu:trusty
+FROM 32bit/ubuntu:14.04
 
 # add zfs ppa
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys E871F18B51E0147C77796AC81196BA81F6B0FC61
@@ -91,7 +91,7 @@ RUN cd /usr/local/lvm2 \
 #            will need updating, to avoid errors. Ping #docker-maintainers on IRC 
 #            with a heads-up.
 ENV GO_VERSION 1.5.3
-RUN curl -fsSL "https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz" \
+RUN curl -fsSL "https://storage.googleapis.com/golang/go${GO_VERSION}.linux-386.tar.gz" \
 	| tar -xzC /usr/local
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
 ENV GOPATH /go:/go/src/github.com/docker/docker/vendor
@@ -125,13 +125,13 @@ RUN git clone https://github.com/golang/lint.git /go/src/github.com/golang/lint 
 	&& go install -v github.com/golang/lint/golint
 
 # Configure the container for OSX cross compilation
-ENV OSX_SDK MacOSX10.11.sdk
-RUN set -x \
-	&& export OSXCROSS_PATH="/osxcross" \
-	&& git clone --depth 1 https://github.com/tpoechtrager/osxcross.git $OSXCROSS_PATH \
-	&& curl -sSL https://s3.dockerproject.org/darwin/${OSX_SDK}.tar.xz -o "${OSXCROSS_PATH}/tarballs/${OSX_SDK}.tar.xz" \
-	&& UNATTENDED=yes OSX_VERSION_MIN=10.6 ${OSXCROSS_PATH}/build.sh
-ENV PATH /osxcross/target/bin:$PATH
+#ENV OSX_SDK MacOSX10.11.sdk
+#RUN set -x \
+#	&& export OSXCROSS_PATH="/osxcross" \
+#	&& git clone --depth 1 https://github.com/tpoechtrager/osxcross.git $OSXCROSS_PATH \
+#	&& curl -sSL https://s3.dockerproject.org/darwin/${OSX_SDK}.tar.xz -o "${OSXCROSS_PATH}/tarballs/${OSX_SDK}.tar.xz" \
+#	&& UNATTENDED=yes OSX_VERSION_MIN=10.6 ${OSXCROSS_PATH}/build.sh
+#ENV PATH /osxcross/target/bin:$PATH
 
 # install seccomp
 # this can be changed to the ubuntu package libseccomp-dev if dockerinit is removed,
@@ -168,16 +168,16 @@ RUN set -x \
 	&& rm -rf "$GOPATH"
 
 # Install notary server
-ENV NOTARY_VERSION docker-v1.10-5
-RUN set -x \
-	&& export GOPATH="$(mktemp -d)" \
-	&& git clone https://github.com/docker/notary.git "$GOPATH/src/github.com/docker/notary" \
-	&& (cd "$GOPATH/src/github.com/docker/notary" && git checkout -q "$NOTARY_VERSION") \
-	&& GOPATH="$GOPATH/src/github.com/docker/notary/Godeps/_workspace:$GOPATH" \
-		go build -o /usr/local/bin/notary-server github.com/docker/notary/cmd/notary-server \
-	&& GOPATH="$GOPATH/src/github.com/docker/notary/Godeps/_workspace:$GOPATH" \
-		go build -o /usr/local/bin/notary github.com/docker/notary/cmd/notary \
-	&& rm -rf "$GOPATH"
+#ENV NOTARY_VERSION docker-v1.10-5
+#RUN set -x \
+#	&& export GOPATH="$(mktemp -d)" \
+#	&& git clone https://github.com/docker/notary.git "$GOPATH/src/github.com/docker/notary" \
+#	&& (cd "$GOPATH/src/github.com/docker/notary" && git checkout -q "$NOTARY_VERSION") \
+#	&& GOPATH="$GOPATH/src/github.com/docker/notary/Godeps/_workspace:$GOPATH" \
+#		go build -o /usr/local/bin/notary-server github.com/docker/notary/cmd/notary-server \
+#	&& GOPATH="$GOPATH/src/github.com/docker/notary/Godeps/_workspace:$GOPATH" \
+#		go build -o /usr/local/bin/notary github.com/docker/notary/cmd/notary \
+#	&& rm -rf "$GOPATH"
 
 # Get the "docker-py" source so we can run their integration tests
 ENV DOCKER_PY_COMMIT e2878cbcc3a7eef99917adc1be252800b0e41ece
