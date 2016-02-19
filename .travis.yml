@@ -1,0 +1,19 @@
+sudo: required
+services:
+  - docker
+language: bash
+script:
+  - make binary
+  - sudo chown -R travis:travis bundles
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "AG3zLxcYVjJotBPNDfYkHdO99w4R9GjHTK6elEQ1emGJPvdzua7S9Ro+07svwt0bClCQWnfFl0NCi7wthAnUGuU3TAjiTKpy5ErGxUFErmJMwl3cFVGR4Huk1cAd/aIwlxqb311+0a55xAIODnstXu3AULb0KTn39T70uIsDpzxNQ7jz340TIjkUiWZgPbTJTDxCnWljkcQVl45MgV7FIF96YJpf0escdgh2DkriyJePbMg2yWMH6l6/HSb3HOY8MVjufx6mJUSRWRY6VpJPxhzypEYsLaGaWbuTSYw4XmpFnfrAPK9tKMdPmvNySLME1IqoFCZgV2fu/Gl9WWVe6AuTkUUV5kosVxt6JJ8hvrGW7RGyoM4PuNrXB0E+ACDiRYzug4gBdng7rsC+yYO7ZHn5BwyaCozKXkzjWFLWeFJZyHrJ9X+MxpkBmtDbYEJiMIT2rW1eFER1RdtvaSzhAWhTk7JXNlCtHLPFaQhFmsTw1yvpnfswvVqLySDWJ4UM9SzP6zQHZ3pVV9EakVWnPAgOznnM8Q7fdHCTfL/5K8Wxi3/bgD0SUNgwEloNsFA3PZQLuttk1Q1Y/f3DiI1gQWmL0mkZzFizh2vt7NQAsiPyJCDc1PdNMV+ffJ2YGUVZ2lGg84iodKwaVsci3jg/ymrFWv5leuiUW0jOswaFfUs="
+  file:
+    - bundles/1.10.1/binary/docker-1.10.1
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: StefanScherer/docker
+    all_branches: true
