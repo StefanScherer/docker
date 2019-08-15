@@ -633,6 +633,7 @@ pipeline {
                     }
                     agent {
                         node {
+                            customWorkspace 'c:\\gopath\\src\\github.com\\docker\\docker'
                             label 'windows-2016'
                         }
                     }
@@ -661,6 +662,7 @@ pipeline {
                     }
                     agent {
                         node {
+                            customWorkspace 'c:\\gopath\\src\\github.com\\docker\\docker'
                             label 'windows-2019'
                         }
                     }
