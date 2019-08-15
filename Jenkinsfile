@@ -631,6 +631,7 @@ pipeline {
                         beforeAgent true
                         expression { params.windowsRS1 }
                     }
+                    environment { DOCKER_BUILDKIT = '0' }
                     agent {
                         node {
                             customWorkspace 'c:\\gopath\\src\\github.com\\docker\\docker'
@@ -660,6 +661,7 @@ pipeline {
                         beforeAgent true
                         expression { params.windowsRS5 }
                     }
+                    environment { DOCKER_BUILDKIT = '0' }
                     agent {
                         node {
                             customWorkspace 'c:\\gopath\\src\\github.com\\docker\\docker'
