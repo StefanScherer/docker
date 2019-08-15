@@ -680,7 +680,7 @@ Try {
         Write-Host -ForegroundColor Green "INFO: Base image for tests is $env:WINDOWS_BASE_IMAGE"
 
         $ErrorActionPreference = "SilentlyContinue"
-        if ($((& "$env:TEMP\binary\docker-$COMMITHASH" "-H=$($DASHH_CUT)" images --format "{{.Repository}}:{{.Tag}}" | Select-String "$($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG") | Measure-Object -Line).Lines) -eq 0) {
+        if ($((& "$env:TEMP\binary\docker-$COMMITHASH" "-H=$($DASHH_CUT)" images --format "{{.Repository}}:{{.Tag}}" | Select-String "$($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG" | Measure-Object -Line).Lines) -eq 0) {
             # Try the internal azure CI image version or Microsoft internal corpnet where the base image is already pre-prepared on the disk,
             # either through Invoke-DockerCI or, in the case of Azure CI servers, baked into the VHD at the same location.
             if (Test-Path $("c:\baseimages\"+$($env:WINDOWS_BASE_IMAGE -Split "/")[1]+".tar")) {
