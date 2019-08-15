@@ -345,15 +345,15 @@ Try {
             Write-Host -ForegroundColor Green "INFO: docker load of"$ControlDaemonBaseImage" completed successfully"
         } else {
             # We need to docker pull it instead. It will come in directly as microsoft/imagename:latest
-            Write-Host -ForegroundColor Green $("INFO: Pulling $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG from docker hub into daemon under test. This may take some time...")
+            Write-Host -ForegroundColor Green $("INFO: Pulling $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG from docker hub. This may take some time...")
             $ErrorActionPreference = "SilentlyContinue"
-            docker pull $($env:WINDOWS_BASE_IMAGE):$($env:WINDOWS_BASE_IMAGE_TAG)
+            docker pull "$($env:WINDOWS_BASE_IMAGE):$($env:WINDOWS_BASE_IMAGE_TAG)"
             $ErrorActionPreference = "Stop"
             if (-not $LastExitCode -eq 0) {
                 Throw $("ERROR: Failed to docker pull "+$env:WINDOWS_BASE_IMAGE+":$env:WINDOWS_BASE_IMAGE_TAG.")
             }
             Write-Host -ForegroundColor Green $("INFO: docker pull of "+$env:WINDOWS_BASE_IMAGE+":latest into daemon under test completed successfully")
-            docker tag $($env:WINDOWS_BASE_IMAGE):$($env:WINDOWS_BASE_IMAGE_TAG) microsoft/$ControlDaemonBaseImage
+            docker tag "$($env:WINDOWS_BASE_IMAGE):$($env:WINDOWS_BASE_IMAGE_TAG)" microsoft/$ControlDaemonBaseImage
         }
     } else {
         Write-Host -ForegroundColor Green "INFO: Image"$("microsoft/"+$ControlDaemonBaseImage+":latest")"is already loaded in the control daemon"
