@@ -673,8 +673,8 @@ Try {
 
         # Lowercase and make sure it has a microsoft/ prefix
         $env:WINDOWS_BASE_IMAGE = $env:WINDOWS_BASE_IMAGE.ToLower()
-        if ($($env:WINDOWS_BASE_IMAGE -Split "/")[0] -ne "microsoft") {
-            Throw "ERROR: WINDOWS_BASE_IMAGE should start microsoft/"
+        if (! $($env:WINDOWS_BASE_IMAGE -Split "/")[0] -match "microsoft") {
+            Throw "ERROR: WINDOWS_BASE_IMAGE should start microsoft/ or mcr.microsoft.com/"
         }
 
         Write-Host -ForegroundColor Green "INFO: Base image for tests is $env:WINDOWS_BASE_IMAGE"
