@@ -687,8 +687,6 @@ pipeline {
                                 $env:CONTROL_BASE_IMAGE_TAG="ltsc2019"
                                 $env:WINDOWS_BASE_IMAGE="mcr.microsoft.com/windows/servercore"
                                 $env:WINDOWS_BASE_IMAGE_TAG="ltsc2019"
-                                docker pull mcr.microsoft.com/windows/servercore:ltsc2019
-                                docker tag mcr.microsoft.com/windows/servercore:ltsc2019 microsoft/windowsservercore:latest
                                 ./hack/ci/windows.ps1
                                 exit $LastExitCode
                                 '''
