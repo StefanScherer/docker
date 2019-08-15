@@ -634,7 +634,7 @@ pipeline {
                     environment { DOCKER_BUILDKIT = '0' }
                     agent {
                         node {
-                            customWorkspace 'c:\\gopath\\src\\github.com\\docker\\docker'
+                            customWorkspace 'd:\\gopath\\src\\github.com\\docker\\docker'
                             label 'windows-2016'
                         }
                     }
@@ -664,7 +664,7 @@ pipeline {
                     environment { DOCKER_BUILDKIT = '0' }
                     agent {
                         node {
-                            customWorkspace 'c:\\gopath\\src\\github.com\\docker\\docker'
+                            customWorkspace 'd:\\gopath\\src\\github.com\\docker\\docker'
                             label 'windows-2019'
                         }
                     }
@@ -680,7 +680,7 @@ pipeline {
                                 powershell '''
                                 $ErrorActionPreference = 'Stop'
                                 Invoke-WebRequest https://github.com/jhowardmsft/docker-ci-zap/blob/master/docker-ci-zap.exe?raw=true -OutFile C:/Windows/System32/docker-ci-zap.exe
-                                $env:SOURCES_DRIVE="c"
+                                $env:SOURCES_DRIVE="d"
                                 $env:SKIP_VALIDATION_TESTS="true"
                                 $env:SOURCES_SUBDIR="gopath"
                                 $env:TESTRUN_DRIVE="d"
