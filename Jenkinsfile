@@ -12,8 +12,8 @@ pipeline {
         booleanParam(name: 'janky', defaultValue: false, description: 'x86 Build/Test')
         booleanParam(name: 'z', defaultValue: false, description: 'IBM Z (s390x) Build/Test')
         booleanParam(name: 'powerpc', defaultValue: false, description: 'PowerPC (ppc64le) Build/Test')
-        booleanParam(name: 'windowsRS1', defaultValue: false, description: 'Windows 2016 (RS1) Build/Test')
-        booleanParam(name: 'windowsRS5', defaultValue: true, description: 'Windows 2019 (RS5) Build/Test')
+        booleanParam(name: 'windowsRS1', defaultValue: true, description: 'Windows 2016 (RS1) Build/Test')
+        booleanParam(name: 'windowsRS5', defaultValue: false, description: 'Windows 2019 (RS5) Build/Test')
     }
     environment {
         DOCKER_BUILDKIT     = '1'

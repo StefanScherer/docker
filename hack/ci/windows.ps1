@@ -356,6 +356,7 @@ Try {
                 Throw $("ERROR: Failed to docker pull $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG.")
             }
             Write-Host -ForegroundColor Green $("INFO: docker pull of $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG completed successfully")
+            Write-Host -ForegroundColor Green $("INFO: Tagging $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG as microsoft/$ControlDaemonBaseImage")
             docker tag "$($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG" microsoft/$ControlDaemonBaseImage
         }
     } else {
@@ -702,7 +703,8 @@ Try {
                     Throw $("ERROR: Failed to docker pull $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG into daemon under test.")
                 }
                 Write-Host -ForegroundColor Green $("INFO: docker pull of $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG into daemon under test completed successfully")
-                & "$env:TEMP\binary\docker-$COMMITHASH" "-H=$($DASHH_CUT)" tag "$($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG" microsoft/$ControlDaemonBaseImage                
+                Write-Host -ForegroundColor Green $("INFO: Tagging $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG as microsoft/$ControlDaemonBaseImage in daemon under test")
+                & "$env:TEMP\binary\docker-$COMMITHASH" "-H=$($DASHH_CUT)" tag "$($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG" microsoft/$ControlDaemonBaseImage
             }
         } else {
             Write-Host -ForegroundColor Green "INFO: Image $($env:WINDOWS_BASE_IMAGE):$env:WINDOWS_BASE_IMAGE_TAG is already loaded in the daemon under test"
