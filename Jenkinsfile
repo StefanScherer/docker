@@ -649,14 +649,13 @@ pipeline {
                             steps {
                                 powershell '''
                                 $ErrorActionPreference = 'Stop'
+                                [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
                                 Invoke-WebRequest https://github.com/jhowardmsft/docker-ci-zap/blob/master/docker-ci-zap.exe?raw=true -OutFile C:/Windows/System32/docker-ci-zap.exe
                                 $env:SOURCES_DRIVE="d"
                                 $env:SKIP_VALIDATION_TESTS="true"
                                 $env:SOURCES_SUBDIR="gopath"
                                 $env:TESTRUN_DRIVE="d"
                                 $env:TESTRUN_SUBDIR="CI-$env:BUILD_NUMBER"
-                                $env:CONTROL_BASE_IMAGE="mcr.microsoft.com/windows/servercore"
-                                $env:CONTROL_BASE_IMAGE_TAG="ltsc2016"
                                 $env:WINDOWS_BASE_IMAGE="mcr.microsoft.com/windows/servercore"
                                 $env:WINDOWS_BASE_IMAGE_TAG="ltsc2016"
                                 ./hack/ci/windows.ps1
@@ -695,8 +694,6 @@ pipeline {
                                 $env:SOURCES_SUBDIR="gopath"
                                 $env:TESTRUN_DRIVE="d"
                                 $env:TESTRUN_SUBDIR="CI-$env:BUILD_NUMBER"
-                                $env:CONTROL_BASE_IMAGE="mcr.microsoft.com/windows/servercore"
-                                $env:CONTROL_BASE_IMAGE_TAG="ltsc2019"
                                 $env:WINDOWS_BASE_IMAGE="mcr.microsoft.com/windows/servercore"
                                 $env:WINDOWS_BASE_IMAGE_TAG="ltsc2019"
                                 ./hack/ci/windows.ps1
