@@ -34,10 +34,13 @@ RUN --mount=type=cache,sharing=locked,id=moby-criu-aptlib,target=/var/lib/apt \
 # Install CRIU for checkpoint/restore support
 ENV CRIU_VERSION 3.13
 RUN mkdir -p /usr/src/criu \
-    && curl -sSL https://github.com/checkpoint-restore/criu/archive/v${CRIU_VERSION}.tar.gz | tar -C /usr/src/criu/ -xz --strip-components=1 \
-    && cd /usr/src/criu \
-    && make \
-    && make PREFIX=/build/ install-criu
+    && curl -sSL https://github.com/checkpoint-restore/criu/archive/v${CRIU_VERSION}.tar.gz | tar -C /usr/src/criu/ -xz --strip-components=1
+RUN if [ "$(go env GOHOSTARCH)" = "arm" ]; then \
+      make -C /usr/src/criu UNAME-M=armv7l; \
+    else \
+      make -C /usr/src/criu; \
+    fi \
+    && make -C /usr/src/criu PREFIX=/build/ install-criu
 
 FROM base AS registry
 WORKDIR /go/src/github.com/docker/distribution
